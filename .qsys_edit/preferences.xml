@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences>
+ <debug showDebugMenu="0" />
+ <systemtable>
+  <columns>
+   <connections preferredWidth="319" />
+   <irq preferredWidth="34" />
+   <name preferredWidth="170" />
+  </columns>
+ </systemtable>
+ <clocktable>
+  <columns>
+   <clockname preferredWidth="409" />
+   <clocksource preferredWidth="409" />
+   <frequency preferredWidth="394" />
+  </columns>
+ </clocktable>
+ <window width="1524" height="853" x="184" y="234" />
+ <library
+   expandedCategories="Library/University Program,Library,Library/Interface Protocols/SDI,Library/University Program/Audio &amp; Video,Library/Interface Protocols,Project" />
+ <hdlexample language="VHDL" />
+</preferences>
