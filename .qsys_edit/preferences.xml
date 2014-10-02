@@ -15,7 +15,7 @@
    <frequency preferredWidth="394" />
   </columns>
  </clocktable>
- <window width="1524" height="853" x="184" y="234" />
+ <window width="1524" height="853" x="91" y="8" />
  <library
    expandedCategories="Library/University Program,Library,Library/Interface Protocols/SDI,Library/University Program/Audio &amp; Video,Library/Interface Protocols,Project" />
  <hdlexample language="VHDL" />
