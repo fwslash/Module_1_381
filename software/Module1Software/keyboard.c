@@ -34,10 +34,10 @@ void getKeyboardInput(int type, player_t* player, system_t* system) {
 					}
 				} else if (buf == DOWN) {
 					if (type == 1) {
-						player->velocity += 5;
+						player->velocity -= 5;
 						printf("Current Velocity : %d\n", player->velocity);
 					} else if (type == 2) {
-						player->angle += 5;
+						player->angle -= 5;
 						printf("Current Angle : %d\n", player->angle);
 
 					}
