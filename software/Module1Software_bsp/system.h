@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_system' in SOPC Builder design 'nios2_system'
  * SOPC Builder design path: C:/Users/Harry/Documents/UBC/EECE381/Module_1_381/nios2_system.sopcinfo
  *
- * Generated: Wed Oct 01 02:07:31 PDT 2014
+ * Generated: Wed Oct 01 20:53:33 PDT 2014
  */
 
 /*
@@ -299,8 +299,8 @@
  */
 
 #define ALT_MAX_FD 32
-#define ALT_SYS_CLK SDCARD_TIMER
-#define ALT_TIMESTAMP_CLK none
+#define ALT_SYS_CLK none
+#define ALT_TIMESTAMP_CLK SDCARD_TIMER
 
 
 /*

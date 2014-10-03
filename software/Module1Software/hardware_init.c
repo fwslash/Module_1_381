@@ -21,11 +21,23 @@ alt_up_pixel_buffer_dma_dev* initiate_pixel_buffer_dma(char* name) {
 		printf("Pixel Buffer DMA Peripheral Loaded\n");
 	}
 
-	alt_up_pixel_buffer_dma_change_back_buffer_address(dev, drawer_base);
+	alt_up_pixel_buffer_dma_change_back_buffer_address(dev, SRAM_0_BASE);
 	alt_up_pixel_buffer_dma_swap_buffers(dev);
 	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(dev))
 		;
 	alt_up_pixel_buffer_dma_clear_screen(dev, 0);
+	return dev;
+}
+
+/* Initiates the character buffer and returns the address */
+alt_up_char_buffer_dev* initiate_char_buffer(char* name) {
+	alt_up_char_buffer_dev* dev = alt_up_char_buffer_open_dev(name);
+	if (dev == NULL) {
+		printf("Unable to get character buffer dev.\n");
+	} else {
+		printf("Char buffer loaded");
+	}
+	alt_up_char_buffer_init(dev);
 	return dev;
 }
 
@@ -65,10 +77,11 @@ alt_up_ps2_dev* initiate_ps2(char* name) {
 }
 
 /* Initiates the system peripherals and returns the dev_t object */
-system_t* system_init(char* pixel_buffer_name, char* sd_card_name,
-		char* ps2_name) {
+system_t* system_init(char* pixel_buffer_name, char* char_buffer_name,
+		char* sd_card_name, char* ps2_name) {
 	system_t* system = (system_t*) malloc(sizeof(system_t));
 	system->pixel_buffer = initiate_pixel_buffer_dma(pixel_buffer_name);
+	system->char_buffer = initiate_char_buffer(char_buffer_name);
 	system->sd_card = initiate_sd_card(sd_card_name);
 	system->ps2 = initiate_ps2(ps2_name);
 	return system;

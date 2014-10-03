@@ -148,6 +148,7 @@ C_SRCS += hardware_init.c
 C_SRCS += player.c
 C_SRCS += keyboard.c
 C_SRCS += graphics.c
+C_SRCS += setup_graphics.c
 CXX_SRCS :=
 ASM_SRCS :=
 

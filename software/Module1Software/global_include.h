@@ -13,13 +13,13 @@
 #define NULL		((void*)0)
 #endif
 
-#define NO_PS2 		1 /* for cases where PS/2 keyboard unavailable */
+#define NO_PS2 		0 /* for cases where PS/2 keyboard unavailable */
 #define TEST_MODE 	1
 #define TRUE 		1
 #define FALSE		0
 
 /* Necessary Addresses */
-#define drawer_base	SRAM_0_BASE
+#define drawer_base	PIXEL_DRAWER_0_BASE
 
 /* PS/2 Input Map */
 #define	UP			(char)0x75
@@ -27,18 +27,17 @@
 #define ENTER		(char)0x5A
 
 /* Calculation Constants */
-#define HARDWARE_EN	1
+#define HARDWARE_EN	0
 #define	ACCEL_G		-9.81
-#define DAMAGE		10
+#define DAMAGE		50
 
 /* Trajectory Constants */
-#define INIT_BALL_XPOS_TO_RIGHT (int)19
-#define INIT_BALL_YPOS_TO_RIGHT	(int)211;
-#define INIT_BALL_XPOS_TO_LEFT	(int)299;
-#define INIT_BALL_YPOS_TO_LEFT	(int)211;
-#define TIME_SCALE	0.01;
-#define GRAVITY_SCALE	(double)(1/16)
-#define DISTANCE_SCALE	(double)(1)
+#define INIT_BALL_XPOS_TO_RIGHT (int)20
+#define INIT_BALL_YPOS_TO_RIGHT	(int)210
+#define INIT_BALL_XPOS_TO_LEFT	(int)298
+#define INIT_BALL_YPOS_TO_LEFT	(int)210
+#define TIME_SCALE	0.03
+#define GRAVITY_SCALE	(double)(3/2) /* recommended to set it in (1,2) */
 
 /* Animation Constants */
 #define BACKGROUND_HEX 	0xffffff // white
@@ -57,7 +56,10 @@
 #define PLAYER_TWO_X2	SCREEN_WIDTH
 #define PLAYER_TWO_Y2	SCREEN_HEIGHT-PLAYER_HEIGHT
 
+#define INIT_VELOCITY	0
+#define INIT_ANGLE		0
+
 #define BALL_HEX		0x000000 // black
-#define BALL_SIZE		2
+#define BALL_SIZE		1
 
 #endif /* GLOBAL_INCLUDE_H_ */

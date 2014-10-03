@@ -6,6 +6,7 @@
 #include "player.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "global_include.h"
 
 /*
  * Makes a new player object with name input.
@@ -19,8 +20,8 @@ player_t* makePlayer(int id, char* name) {
 	player->id = id;
 	sprintf(player->name, name);
 	player->health = 100;
-	player->angle = 45;
-	player->velocity = 50;
+	player->angle = INIT_ANGLE;
+	player->velocity = INIT_VELOCITY;
 	player->previousAngle = 45;
 	player->previousVelocity = 50;
 

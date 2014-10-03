@@ -11,7 +11,8 @@ obj/default/graphics.o: graphics.c graphics.h \
   ../Module1Software_bsp//drivers/inc/Altera_UP_SD_Card_Avalon_Interface.h \
   ../Module1Software_bsp//drivers/inc/altera_up_ps2_keyboard.h \
   ../Module1Software_bsp//drivers/inc/altera_up_avalon_ps2.h player.h \
-  game.h
+  game.h ../Module1Software_bsp//HAL/inc/io.h \
+  ../Module1Software_bsp//HAL/inc/alt_types.h
 
 graphics.h:
 
@@ -48,3 +49,7 @@ hardware_init.h:
 player.h:
 
 game.h:
+
+../Module1Software_bsp//HAL/inc/io.h:
+
+../Module1Software_bsp//HAL/inc/alt_types.h:

@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include <string.h>
 
 /* HAL Library */
 #include "io.h"
@@ -32,9 +33,10 @@ int main(void) {
 	system_t* system;
 	player_t* player1;
 	player_t* player2;
-
+	int wind;
 	/* initialize all hardware dev */
 	system = system_init(VIDEO_PIXEL_BUFFER_DMA_NAME,
+			VIDEO_CHARACTER_BUFFER_WITH_DMA_0_AVALON_CHAR_BUFFER_SLAVE_NAME,
 			ALTERA_UP_SD_CARD_AVALON_INTERFACE_0_NAME, PS2_0_NAME);
 
 	/* initialize required objects */
@@ -43,38 +45,93 @@ int main(void) {
 
 	clearScreen(system);
 	drawPlayers(system, player1);
+	usleep(2000000); // sleep to wait for video buffer to load
 
 	printf("Entering Endless Loop.\n");
 
 	while (TRUE) {
+		printf("\n\n\n\n===========================================================\n");
+		printf("Player 1 Health = %d \t\t Player 2 Health = %d\n", player1->health, player2->health);
+		wind = rand()%11-5;
 
+		printf("Current Wind : %d\n", wind);
 		/* Player 1 Power-Selection */
-//		printf("Press up and down to change power.\n");
-//		printf("Current Velocity : %d\n", firstPlayer->velocity);
-//		getKeyboardInput(1, firstPlayer, system);
-		/* Player 1 Angle-Selection */
-//		printf("Press up and down to change power.\n");
-//		printf("Current Angle : %d\n", firstPlayer->velocity);
-//		getKeyboardInput(2, firstPlayer, system);
-		/* Player 1 Animation */
-		printf("starting animation\n");
-		animateShooting(system, player1);
-		printf("ended animation\n");
-		usleep(10000000);
+		getKeyboardInput(1, player1, system);
 
+		/* Player 1 Angle-Selection */
+		getKeyboardInput(2, player1, system);
+
+		/* Player 1 Animation */
+		printf("Starting animation\n");
+		switch (animateShooting(system, player1, wind)) { // different value for result
+		case 1: {
+			player2->health -= DAMAGE;
+			printf(
+					"Player 1 hit player 2.\n Remaining Health for Player 2: %d\n",
+					player2->health);
+			break;
+		}
+		case 2: {
+			player1->health -= DAMAGE;
+			printf(
+					"Player 1 hit player 1.\n Remaining Health for Player 1: %d\n",
+					player1->health);
+			break;
+		}
+		default: {
+			break;
+		}
+		}
+		printf("Ended animation\n");
 		/* Post-animation Calculation */
+		if (player1->health <= 0 || player2->health <= 0) {
+			break;
+		}
 
 		/* Player 2 Power-Selection */
-//		printf("Press up and down to change power.\n");
-//		printf("Current Angle : %d\n", secondPlayer->velocity);
-//		getKeyboardInput(1, secondPlayer, system);
+		wind = rand()%11-5;
+		printf("Current Wind : %d\n", wind);
+		printf("Getting Player 2 Velocity.\n");
+		getKeyboardInput(1, player2, system);
 		/* Player 2 Angle-Selection */
-//		printf("Press up and down to change power.\n");
-//		printf("Current Angle : %d\n", secondPlayer->velocity);
-//		getKeyboardInput(2, firstPlayer, system);
+		printf("Getting Player 2 Angle.\n");
+		getKeyboardInput(2, player2, system);
 		/* Player 2 Animation */
+		printf("Starting animation\n");
 
 		/* Post-animation Calculation */
+		switch (animateShooting(system, player2, wind)) { // different value for result
+		case 1: {
+			player1->health -= DAMAGE;
+			printf(
+					"Player 2 hit player 1.\n Remaining Health for Player 1: %d\n",
+					player1->health);
+			break;
+		}
+		case 2: {
+			player2->health -= DAMAGE;
+			printf(
+					"Player 2 hit player 2.\n Remaining Health for Player 2: %d\n",
+					player2->health);
+			break;
+		}
+		default: {
+			break;
+		}
+		}
+		if (player1->health <= 0 || player2->health <= 0) {
+			break;
+		}
+
 	}
-	return 0;
+
+	if (player1->health <= 0) {
+		printf("player 2 win\n");
+	} else if (player2->health <= 0) {
+		printf("player 1 win\n");
+	} else {
+		printf("we shouldn't be here.\n");
+	}
+
+	return 0; // FIN
 }
