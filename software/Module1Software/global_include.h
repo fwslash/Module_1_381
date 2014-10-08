@@ -40,7 +40,7 @@
 #define GRAVITY_SCALE	(double)(3/2) /* recommended to set it in (1,2) */
 
 /* Animation Constants */
-#define BACKGROUND_HEX 	0xffffff // white
+#define BACKGROUND_HEX 	0xf7f8e0 // white
 #define SCREEN_WIDTH	320
 #define SCREEN_HEIGHT	240
 #define PLAYER_WIDTH	20

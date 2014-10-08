@@ -150,5 +150,80 @@ int animateShooting(system_t* system, player_t* player, int wind_vel) {
 		return 0; //Miss
 }
 
+void show_angle(player_t *Player, system_t *system, shape_t *last_line,
+		int intAngle) {
+	int player = Player->id;
+	double angle = (double) intAngle;
+	alt_up_pixel_buffer_dma_dev* pixel_buffer = system->pixel_buffer;
+	alt_up_char_buffer_dev * char_buffer = system->char_buffer;
+	double theta = angle * M_PI / 180;
+	//TODO: convert input angle number into string...
+	int x_1, x_2;
+	int y_1 = 210;
+	int y_2 = y_1 - 15 * sin(theta);
+	int line_length = 25;
+
+	if (player == 1) {
+		x_1 = 20;
+		x_2 = x_1 + line_length * cos(theta);
+		clear_last_line(last_line, system);
+	} else {
+		x_1 = 298;
+		x_2 = x_1 - line_length * cos(theta);
+		clear_last_line(last_line, system);
+	}
+
+	alt_up_pixel_buffer_dma_draw_line(pixel_buffer, x_1, y_1, x_2, y_2, 0x0000,
+			0); //draw line
+	//store endpoints of line for later
+	last_line->x_1 = x_1;
+	last_line->x_2 = x_2;
+	last_line->y_1 = y_1;
+	last_line->y_2 = y_2;
+
+	return;
+}
+
+void clear_last_line(shape_t *last_line, system_t *system) {
+	alt_up_pixel_buffer_dma_dev* pixel_buffer = system->pixel_buffer;
+	alt_up_pixel_buffer_dma_draw_line(pixel_buffer, last_line->x_1,
+			last_line->y_1, last_line->x_2, last_line->y_2, 0xf7f8e0,
+			0);
+}
+
+void draw_power_bar(player_t *Player, system_t *system) {
+	int player = Player->id;
+	int x_1, y_1, bar_width, bar_height;
+	x_1 = 30;
+	y_1 = 230;
+	bar_width = 52;
+	bar_height = 5;
+	if (player == 1) {
+		drawBox(system, x_1, y_1, x_1 + bar_width, y_1 + bar_height, 0xFFFFF);
+		drawBox(system, x_1 + 1, y_1 + 1, x_1 + bar_width - 1, y_1 + bar_height - 1,
+				0x00000);
+	} else { //player2 power bar
+		drawBox(system, 320 - x_1, y_1, 320 - (x_1 + bar_width), y_1 + bar_height,
+				0xFFFFF);
+		drawBox(system, 320 - (x_1 + 1), y_1 + 1, 320 - (x_1 + bar_width - 1),
+				y_1 + bar_height - 1, 0x00000);
+	}
+
+}
+
+//assumes velocity range is from 0-100
+void update_power(player_t *Player, system_t *system) {
+	int player = Player->id;
+	int velocity = Player->velocity;
+	draw_power_bar(Player, system); //clear previous level
+	if (player == 1) {
+		drawBox(system, 31, 231, 31 + (velocity / 2), 234, 0xFF000);
+	} else {
+		drawBox(system, 320 - 31, 231, 320 - (31 + (velocity / 2)), 234, 0x0000ff);
+	}
+	return;
+}
+
+
 void animate();
 

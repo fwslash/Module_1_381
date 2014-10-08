@@ -4,6 +4,7 @@
  */
 
 #include "keyboard.h"
+#include "graphics.h"
 
 /**
  * Waits for keyboard input and changes player data as per situation.
@@ -13,6 +14,12 @@
  */
 
 void getKeyboardInput(int type, player_t* player, system_t* system) {
+	shape_t last_line;
+	last_line.x_1 = 0;
+	last_line.x_2 = 0;
+	last_line.y_1 = 0;
+	last_line.y_2 = 0;
+
 	KB_CODE_TYPE code_type;
 	char ascii;
 	unsigned char buf;
@@ -41,43 +48,49 @@ void getKeyboardInput(int type, player_t* player, system_t* system) {
 			code_type = KB_BINARY_MAKE_CODE;
 		}
 		if (status == 0) {
-//			if (code_type == KB_LONG_BINARY_MAKE_CODE
-//					|| code_type == KB_BINARY_MAKE_CODE) { //key press
+			if (code_type == KB_LONG_BINARY_MAKE_CODE
+					|| code_type == KB_BINARY_MAKE_CODE) { //key press
 
-			while (decode_scancode(system->ps2, NULL, NULL, NULL) == -1)
-				;
-			if (buf == UP) {
-				if (type == 1) {
-					if (player->velocity < 100)
-						player->velocity += 5;
-					printf("Player %d's Current Velocity : %d\n", player->id, player->velocity);
-				} else if (type == 2) {
-					if (player->angle < 90)
-						player->angle += 5;
-					printf("Player %d's Current Angle : %d\n", player->id, player->angle);
-				}
-			} else if (buf == DOWN) {
-				if (type == 1) {
-					if (player->velocity > 0)
-						player->velocity -= 5;
-					printf("Player %d's Current Velocity : %d\n", player->id, player->velocity);
-				} else if (type == 2) {
-					if (player->angle > 0)
-						player->angle -= 5;
-					printf("Player %d's Current Angle : %d\n", player->id, player->angle);
+				if (buf == UP) {
+					if (type == 1) {
+						if (player->velocity < 100)
+							player->velocity += 5;
+						update_power(player, system);
+						printf("Player %d's Current Velocity : %d\n",
+								player->id, player->velocity);
+					} else if (type == 2) {
+						if (player->angle < 90)
+							player->angle += 5;
+						show_angle(player, system, &last_line, player->angle);
+						printf("Player %d's Current Angle : %d\n", player->id,
+								player->angle);
+					}
+				} else if (buf == DOWN) {
+					if (type == 1) {
+						if (player->velocity > 0)
+							player->velocity -= 5;
+						update_power(player, system);
+						printf("Player %d's Current Velocity : %d\n",
+								player->id, player->velocity);
+					} else if (type == 2) {
+						if (player->angle > 0)
+							player->angle -= 5;
+						show_angle(player, system, &last_line, player->angle);
+						printf("Player %d's Current Angle : %d\n", player->id,
+								player->angle);
 
+					}
+				} else if (buf == ENTER) { //Covers both Enter & KP_EN
+					if (type == 1) {
+						printf("Final Velocity : %d\n", player->velocity);
+					} else if (type == 2) {
+						printf("Final Angle : %d\n", player->angle);
+					}
+					return;
 				}
-			} else if (buf == ENTER) { //Covers both Enter & KP_EN
-				if (type == 1) {
-					printf("Final Velocity : %d\n", player->velocity);
-				} else if (type == 2) {
-					printf("Final Angle : %d\n", player->angle);
-				}
-				return;
+			} else if (KB_BREAK_CODE || code_type == KB_LONG_BREAK_CODE) {
+				//Do nothing
 			}
-//			} else if (KB_BREAK_CODE || code_type == KB_LONG_BREAK_CODE) {
-//				//Do nothing
-//			}
 		}
 	}
 }

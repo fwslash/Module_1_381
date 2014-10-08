@@ -45,6 +45,8 @@ int main(void) {
 
 	clearScreen(system);
 	drawPlayers(system, player1);
+	draw_power_bar(player1, system);
+	draw_power_bar(player2, system);
 	usleep(2000000); // sleep to wait for video buffer to load
 
 	printf("Entering Endless Loop.\n");
