@@ -1,0 +1,2 @@
+You need to include pixel_drawer.vhd in to your quartus project (keep VGA_Controller.vhd as top-level) and open pixel_drwer_hw.tcl as a custom component in Qsys.
+See Exercise1.5.pdf on connect for instructions.

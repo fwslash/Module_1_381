@@ -227,3 +227,93 @@ void update_power(player_t *Player, system_t *system) {
 
 void animate();
 
+/*
+ * Function to draw a bitmap image to the VGA display.
+ * Parameters:
+ * 	*pixel buffer 				: pixel buffer
+ * 	*pixel_data				 	: pointer to pixel data exported to C source from GIMP
+ * 	image_width, image_height 	: width and height of image to draw
+ * 	x, y						: starting location (top left pixel) of drawing
+ * Optional: replace all draw_X() calls with this function instead.
+ *
+ */
+void draw_bmp(system_t *system, unsigned short *pixel_data, int image_width, int image_height, int x, int y){
+	int i, j;
+	for(j=0; j <= image_height-1; j++){
+		for(i=0; i <= image_width-1; i++){
+			if(*pixel_data == 0xFFFF){
+				alt_up_pixel_buffer_dma_draw(system->pixel_buffer, BACKGROUND, x+i, y+j);
+			}
+			else{
+				alt_up_pixel_buffer_dma_draw(system->pixel_buffer, *pixel_data, x+i, y+j);
+			}
+			pixel_data++;
+		}
+	}
+}
+
+void draw_bomb(system_t *system, int x, int y){
+	draw_bmp(system, &BOMB_pixel_data, BOMB_WIDTH, BOMB_HEIGHT, x, y);
+}
+
+void draw_ground(system_t *system){
+	draw_bmp(system, &GROUND_pixel_data, GROUND_WIDTH, GROUND_HEIGHT, 0, SCREEN_HEIGHT-GROUND_HEIGHT);
+}
+
+void draw_player1(system_t *system, int x, int y ){
+	draw_bmp(system, &PLAYER_1_pixel_data, PLAYER_1_WIDTH, PLAYER_1_HEIGHT, x, y);
+}
+
+void draw_player2(system_t *system, int x, int y ){
+	draw_bmp(system, &PLAYER_2_pixel_data, PLAYER_2_WIDTH, PLAYER_2_HEIGHT, x, y);
+}
+
+void draw_cannon1(system_t *system, int x, int y){
+	draw_bmp(system, &CANNON_1_pixel_data, CANNON_1_WIDTH, CANNON_1_HEIGHT, x, y);
+}
+
+void draw_cannon2(system_t *system, int x, int y){
+	draw_bmp(system, &CANNON_2_pixel_data, CANNON_2_WIDTH, CANNON_2_HEIGHT, x, y);
+}
+
+void animate_cannon1(system_t *system){
+	int t;
+	for(t = 40; t >= 0; t--){
+		if(t%5 == 0)
+			draw_cannon1(system, CANNON_1_X, CANNON_1_Y);
+		else
+			draw_bmp(system, &CANNON_1_FRAME2_pixel_data, CANNON_1_WIDTH, CANNON_1_HEIGHT,CANNON_1_X, CANNON_1_Y);
+	}
+	draw_bmp(system, &CANNON_1_FRAME3_pixel_data, CANNON_1_WIDTH, CANNON_1_HEIGHT,CANNON_1_X, CANNON_1_Y);
+	for(t = 55; t >=0; t--); //wait
+	draw_cannon1(system, CANNON_1_X, CANNON_1_Y);
+}
+
+void animate_cannon2(system_t *system){
+	int t;
+	for(t = 40; t >= 0; t--){
+		if(t%5 == 0)
+			draw_cannon2(system, CANNON_2_X, CANNON_2_Y);
+		else
+			draw_bmp(system, &CANNON_2_FRAME2_pixel_data, CANNON_2_WIDTH, CANNON_2_HEIGHT,CANNON_2_X, CANNON_2_Y);
+	}
+	draw_bmp(system, &CANNON_2_FRAME3_pixel_data, CANNON_2_WIDTH, CANNON_2_HEIGHT,CANNON_2_X, CANNON_2_Y);
+	for(t = 55; t >=0; t--); //wait
+	draw_cannon2(system, CANNON_2_X, CANNON_2_Y);
+}
+
+void draw_P1WIN(system_t *system){
+	draw_bmp(system, &P1WINS_pixel_data, P1WINS_WIDTH, P1WINS_HEIGHT, DIALOGUE_X, DIALOGUE_Y);
+}
+
+void draw_P2WIN(system_t *system){
+	draw_bmp(system, &P2WINS_pixel_data, P2WINS_WIDTH, P2WINS_HEIGHT, DIALOGUE_X, DIALOGUE_Y);
+}
+
+void draw_player1GUI(system_t *system){
+	draw_bmp(system, &P1BOX_pixel_data, P1BOX_WIDTH, P1BOX_HEIGHT, P1GUI_X, P1GUI_Y);
+}
+
+void draw_player2GUI(system_t *system){
+	draw_bmp(system, &P2BOX_pixel_data, P2BOX_WIDTH, P2BOX_HEIGHT, P2GUI_X, P2GUI_Y);
+}

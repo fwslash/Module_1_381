@@ -12,6 +12,7 @@
 #include "player.h"
 #include "game.h"
 #include "io.h"
+#include "images.h"
 
 #ifndef GRAPHICS_H_
 #define GRAPHICS_H_
@@ -41,5 +42,34 @@ void clear_last_line(shape_t*, system_t*);
 void draw_power_bar(player_t*, system_t*);
 //update power bar based on input velocity
 void update_power(player_t*, system_t*);
+
+/* functions for drawing graphics to the screen - added Oct. 11, 2014*/
+
+//draws an image using pixel data dump from GIMP
+void draw_bmp(system_t *system, unsigned short *pixel_data, int image_width, int image_height, int x, int y);
+//draws a bomb to screen with upper left corner at pixel (x,y)
+void draw_bomb(system_t *system, int x, int y);
+//draws the ground image to the display
+void draw_ground(system_t *system);
+//draws player 1 character
+void draw_player1(system_t *system, int x, int y);
+//draws player 2 character
+void draw_player2(system_t *system, int x, int y);
+//draws cannon 1
+void draw_cannon1(system_t *system, int x, int y);
+//draws cannon 2
+void draw_cannon2(system_t *system, int x, int y);
+//shows cannon 1 firing animation
+void animate_cannon1(system_t *system);
+//shows cannon 2 firing animation
+void animate_cannon1(system_t *system);
+//displays P1 Win Dialogue
+void draw_P1WIN(system_t *system);
+//displays P2 Win Dialogue
+void draw_P2WIN(system_t *system);
+//displays player 1 GUI box
+void draw_player1GUI(system_t *system);
+//displays player 2 GUI box
+void draw_player2GUI(system_t *system);
 
 #endif /* GRAPHICS_H_ */

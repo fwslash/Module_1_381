@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="VGA_Controller">
+		<CBX_INST_ENTRY INSTANCE_NAME="|VGA_Controller|VGA_Graphics:NiosII|VGA_Graphics_jtag_uart_0:jtag_uart_0|VGA_Graphics_jtag_uart_0_scfifo_w:the_VGA_Graphics_jtag_uart_0_scfifo_w|scfifo:wfifo" CBX_FILE_NAME="scfifo_1n21.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|VGA_Controller|VGA_Graphics:NiosII|VGA_Graphics_nios2_qsys_0:nios2_qsys_0|VGA_Graphics_nios2_qsys_0_register_bank_a_module:VGA_Graphics_nios2_qsys_0_register_bank_a|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_ubh1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|VGA_Controller|VGA_Graphics:NiosII|VGA_Graphics_video_character_buffer_with_dma_0:video_character_buffer_with_dma_0|altsyncram:Char_Buffer_Memory" CBX_FILE_NAME="altsyncram_4272.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|VGA_Controller|VGA_Graphics:NiosII|VGA_Graphics_jtag_uart_0:jtag_uart_0|VGA_Graphics_jtag_uart_0_scfifo_r:the_VGA_Graphics_jtag_uart_0_scfifo_r|scfifo:rfifo" CBX_FILE_NAME="scfifo_1n21.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|VGA_Controller|VGA_Graphics:NiosII|VGA_Graphics_onchip_memory2_0:onchip_memory2_0|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_sdd1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|VGA_Controller|VGA_Graphics:NiosII|VGA_Graphics_video_dual_clock_buffer_0:video_dual_clock_buffer_0|dcfifo:Data_FIFO" CBX_FILE_NAME="dcfifo_5oj1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|VGA_Controller|VGA_Graphics:NiosII|VGA_Graphics_video_pixel_buffer_dma_0:video_pixel_buffer_dma_0|scfifo:Image_Buffer" CBX_FILE_NAME="scfifo_70a1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|VGA_Controller|VGA_Graphics:NiosII|VGA_Graphics_video_scaler_0:video_scaler_0|altera_up_video_scaler_multiply_height:Multiply_Height|scfifo:Multiply_Height_FIFO" CBX_FILE_NAME="scfifo_qd31.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|VGA_Controller|VGA_Graphics:NiosII|VGA_Graphics_nios2_qsys_0:nios2_qsys_0|VGA_Graphics_nios2_qsys_0_nios2_oci:the_VGA_Graphics_nios2_qsys_0_nios2_oci|VGA_Graphics_nios2_qsys_0_nios2_ocimem:the_VGA_Graphics_nios2_qsys_0_nios2_ocimem|VGA_Graphics_nios2_qsys_0_ociram_sp_ram_module:VGA_Graphics_nios2_qsys_0_ociram_sp_ram|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_2p81.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|VGA_Controller|VGA_Graphics:NiosII|VGA_Graphics_nios2_qsys_0:nios2_qsys_0|VGA_Graphics_nios2_qsys_0_register_bank_b_module:VGA_Graphics_nios2_qsys_0_register_bank_b|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_vbh1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|VGA_Controller|VGA_Graphics:NiosII|VGA_Graphics_video_character_buffer_with_dma_0:video_character_buffer_with_dma_0|altera_up_video_128_character_rom:Character_Rom|altsyncram:character_data_rom" CBX_FILE_NAME="altsyncram_e5i1.tdf"/>
+	</PROJECT>
+</LOG_ROOT>
