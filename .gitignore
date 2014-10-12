@@ -1,0 +1,8 @@
+# For our emacs users
+*~
+
+#
+.project
+.cproject
+.project
+.force_relink
