@@ -4,6 +4,8 @@
  */
 
 #include "graphics.h"
+#include "images.h"
+#include "global_include.h"
 
 int formatColor(int hexCode) {
 	int red = (hexCode >> 16) & 0xff;
