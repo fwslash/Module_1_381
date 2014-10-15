@@ -5,12 +5,56 @@
 
 #include "keyboard.h"
 #include "graphics.h"
+#include "string.h"
+//
+#define UP 0x75
+#define DOWN 0x72
+#define ENTER 0x5A
 
 /**
  * Waits for keyboard input and changes player data as per situation.
  * @param	type - 1 for Vel/Pow, 2 for Angle
  * @param	player - player object
- * @param 	system - system dev obejct
+ * @param 	system - system dev object
+ */
+
+/*
+ void getKeyboardMappings(system_t* system) {
+ KB_CODE_TYPE code_type;
+ char ascii;
+ unsigned char buf;
+ int status = -1;
+ printf("Press key for UP\n");
+ while(TRUE){
+ status = decode_scancode(system->ps2, &code_type, &buf, &ascii);
+ if(status == 0){
+ printf("%c was grabbed from the keyboard for UP.\n", buf);
+ UP = buf;
+ break;
+ }
+ }
+ status = -1;
+ printf("Press key for DOWN\n");
+ while(TRUE){
+ status = decode_scancode(system->ps2, &code_type, &buf, &ascii);
+ if(status == 0){
+ printf("%c was grabbed from the keyboard for UP.\n", buf);
+ UP = buf;
+ break;
+ }
+ }
+ printf("Press key for SUBMIT\n");
+ status = -1;
+ while(TRUE){
+ status = decode_scancode(system->ps2, &code_type, &buf, &ascii);
+ if(status == 0){
+ printf("%c was grabbed from the keyboard for UP.\n", buf);
+ UP = buf;
+ break;
+ }
+ }
+ printf("All done. \n");
+ }
  */
 
 void getKeyboardInput(int type, player_t* player, system_t* system) {
@@ -27,9 +71,6 @@ void getKeyboardInput(int type, player_t* player, system_t* system) {
 
 	int status = 1;
 	while (TRUE) {
-//		printf("Current Player: %d\n", player->id);
-//		printf("Current Velocity: %d\n", player->velocity);
-//		printf("Current Angle: %d\n", player->angle);
 		if (!NO_PS2) {
 			status = decode_scancode(system->ps2, &code_type, &buf, &ascii);
 		} else {
@@ -48,9 +89,7 @@ void getKeyboardInput(int type, player_t* player, system_t* system) {
 			code_type = KB_BINARY_MAKE_CODE;
 		}
 		if (status == 0) {
-			if (code_type == KB_LONG_BINARY_MAKE_CODE
-					|| code_type == KB_BINARY_MAKE_CODE) { //key press
-
+			if (code_type == KB_BINARY_MAKE_CODE || KB_ASCII_MAKE_CODE) { //key press
 				if (buf == UP) {
 					if (type == 1) {
 						if (player->velocity < 100)
@@ -78,7 +117,6 @@ void getKeyboardInput(int type, player_t* player, system_t* system) {
 						show_angle(player, system, &last_line, player->angle);
 						printf("Player %d's Current Angle : %d\n", player->id,
 								player->angle);
-
 					}
 				} else if (buf == ENTER) { //Covers both Enter & KP_EN
 					if (type == 1) {
@@ -88,9 +126,14 @@ void getKeyboardInput(int type, player_t* player, system_t* system) {
 					}
 					return;
 				}
-			} else if (KB_BREAK_CODE || code_type == KB_LONG_BREAK_CODE) {
-				//Do nothing
+			} else {
+				// Do nothing.
 			}
 		}
 	}
 }
+
+//		printf("Current Player: %d\n", player->id);
+//		printf("Current Velocity: %d\n", player->velocity);
+//		printf("Current Angle: %d\n", player->angle);
+

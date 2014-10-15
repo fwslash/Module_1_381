@@ -46,10 +46,12 @@ void update_power(player_t*, system_t*);
 /* functions for drawing graphics to the screen - added Oct. 11, 2014*/
 
 //draws an image using pixel data dump from GIMP
-void draw_bmp(system_t *system, unsigned short *pixel_data, int image_width, int image_height, int x, int y);
+void draw_bmp(system_t *system, unsigned short *pixel_data, int image_width,
+		int image_height, int x, int y);
 //draws a bomb to screen with upper left corner at pixel (x,y)
 void draw_bomb(system_t *system, int x, int y);
 //draws the ground image to the display
+void draw_windbox(system_t *);
 void draw_ground(system_t *system);
 //draws player 1 character
 void draw_player1(system_t *system, int x, int y);
