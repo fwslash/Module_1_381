@@ -15,7 +15,7 @@
 #define NULL		((void*)0)
 #endif
 
-#define NO_PS2 		0 /* for cases where PS/2 keyboard unavailable */
+#define NO_PS2 		1 /* for cases where PS/2 keyboard unavailable */
 #define TEST_MODE 	1
 #define TRUE 		1
 #define FALSE		0
@@ -23,10 +23,6 @@
 /* Necessary Addresses */
 #define drawer_base	PIXEL_DRAWER_0_BASE
 
-/* PS/2 Input Map */
-#define	UP			(char)0x75
-#define DOWN		(char)0x72
-#define ENTER		(char)0x5A
 
 /* Calculation Constants */
 #define HARDWARE_EN	0
@@ -34,11 +30,12 @@
 #define DAMAGE		50
 
 /* Trajectory Constants */
-#define INIT_BALL_XPOS_TO_RIGHT (int)20
-#define INIT_BALL_YPOS_TO_RIGHT	(int)210
-#define INIT_BALL_XPOS_TO_LEFT	(int)298
-#define INIT_BALL_YPOS_TO_LEFT	(int)210
-#define TIME_SCALE	0.03
+#define INIT_BALL_XPOS_TO_RIGHT (int)PLAYER_1_WIDTH + CANNON_1_WIDTH - 5;
+#define INIT_BALL_YPOS_TO_RIGHT    (int)SCREEN_HEIGHT - CANNON_1_HEIGHT - GROUND_HEIGHT;
+#define INIT_BALL_XPOS_TO_LEFT    (int)SCREEN_WIDTH - PLAYER_2_WIDTH - CANNON_2_WIDTH - 5;
+#define INIT_BALL_YPOS_TO_LEFT    (int)SCREEN_HEIGHT - CANNON_2_HEIGHT - GROUND_HEIGHT;
+
+#define TIME_SCALE	0.1
 #define GRAVITY_SCALE	(double)(3/2) /* recommended to set it in (1,2) */
 
 /* Animation Constants */
@@ -69,6 +66,19 @@
 #define DIALOGUE_X	115
 #define DIALOGUE_Y	90
 
+#define	BAR_X_P1 45
+#define	BAR_X_P2 45
+#define BAR_Y 228
+#define BAR_WIDTH 42
+#define BAR_HEIGHT 3
+#define BAR_BACKGROUND
+
+#define WINDBOX_X_MID 160
+#define WINDBOX_Y 3
+#define WINDBOX_BAR_Y 10
+#define WINDBOX_BAR_HEIGHT 1
+#define WINDBOX_BAR_WIDTH 40
+
 #define PLAYER_ONE_X1	0
 #define PLAYER_ONE_Y1	SCREEN_HEIGHT
 #define PLAYER_ONE_X2	PLAYER_WIDTH
@@ -79,8 +89,8 @@
 #define PLAYER_TWO_X2	SCREEN_WIDTH
 #define PLAYER_TWO_Y2	SCREEN_HEIGHT-PLAYER_HEIGHT
 
-#define INIT_VELOCITY	0
-#define INIT_ANGLE		0
+#define INIT_VELOCITY	45
+#define INIT_ANGLE		45
 
 #define BALL_HEX		0x000000 // black
 #define BALL_SIZE		1

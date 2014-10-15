@@ -129,26 +129,30 @@ BUILD_CONFIGS := default
 
 # This following VERSION comment indicates the version of the tool used to 
 # generate this makefile. A makefile variable is provided for VERSION as well. 
-# ACDS_VERSION: 13.0sp1
-ACDS_VERSION := 13.0sp1
+# ACDS_VERSION: 13.0
+ACDS_VERSION := 13.0
 
 # This following BUILD_NUMBER comment indicates the build number of the tool 
 # used to generate this makefile. 
-# BUILD_NUMBER: 232
+# BUILD_NUMBER: 156
 
 # Define path to the application ELF. 
 # It may be used by the makefile fragments so is defined before including them. 
 # 
-ELF := Module1Software.elf
+ELF := 381module1.elf
 
 # Paths to C, C++, and assembly source files.
-C_SRCS += main.c
 C_SRCS += game.c
-C_SRCS += hardware_init.c
-C_SRCS += player.c
-C_SRCS += keyboard.c
 C_SRCS += graphics.c
-C_SRCS += setup_graphics.c
+C_SRCS += hardware_init.c
+C_SRCS += keyboard.c
+C_SRCS += main.c
+C_SRCS += player.c
+C_SRCS += draw_bmp_oct9/bomb.c
+C_SRCS += draw_bmp_oct9/bomb_shoot.c
+C_SRCS += draw_bmp_oct9/ground.c
+C_SRCS += draw_bmp_oct9/player1.c
+C_SRCS += draw_bmp_oct9/player2.c
 CXX_SRCS :=
 ASM_SRCS :=
 
@@ -183,7 +187,7 @@ CRT0 :=
 SYS_LIB :=
 
 # Define path to the root of the BSP.
-BSP_ROOT_DIR := ../Module1Software_bsp/
+BSP_ROOT_DIR := ../381module1_bsp/
 
 # List of application specific include directories, library directories and library names
 APP_INCLUDE_DIRS :=

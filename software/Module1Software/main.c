@@ -43,25 +43,38 @@ int main(void) {
 	player1 = makePlayer(1, "TJ");
 	player2 = makePlayer(2, "Lomash");
 
+	/*
+	 * Draw the screen for the first time.
+	 */
 	clearScreen(system);
 	drawPlayers(system, player1);
-	draw_power_bar(player1, system);
-	draw_power_bar(player2, system);
+	draw_ground(system);
+	draw_windbox(system);
+	draw_player1GUI(system);
+	draw_player2GUI(system);
+	update_wind(system, wind);
+	update_health(player1, system);
+	update_health(player2, system);
+	update_power(player1, system);
+	update_power(player2, system);
 	usleep(2000000); // sleep to wait for video buffer to load
 
-	printf("Entering Endless Loop.\n");
-
 	while (TRUE) {
-		printf("\n\n\n\n===========================================================\n");
-		printf("Player 1 Health = %d \t\t Player 2 Health = %d\n", player1->health, player2->health);
-		wind = rand()%11-5;
+		//	getKeyboardMappings(system);
+		printf(
+				"\n\n\n\n===========================================================\n");
+		printf("Player 1 Health = %d \t\t Player 2 Health = %d\n",
+				player1->health, player2->health);
+		wind = rand() % 11 - 5;
+		update_wind(system, wind);
 
-		printf("Current Wind : %d\n", wind);
-		/* Player 1 Power-Selection */
-		getKeyboardInput(1, player1, system);
-
-		/* Player 1 Angle-Selection */
-		getKeyboardInput(2, player1, system);
+		/*
+		 * Player 1's turn
+		 */
+		printf("Getting Player 1 Power.\n");
+		getKeyboardInput(1, player1, system); // Power
+		printf("Getting Player 1 Angle.\n");
+		getKeyboardInput(2, player1, system); // Angle
 
 		/* Player 1 Animation */
 		printf("Starting animation\n");
@@ -85,19 +98,29 @@ int main(void) {
 		}
 		}
 		printf("Ended animation\n");
+
 		/* Post-animation Calculation */
 		if (player1->health <= 0 || player2->health <= 0) {
 			break;
 		}
 
-		/* Player 2 Power-Selection */
-		wind = rand()%11-5;
-		printf("Current Wind : %d\n", wind);
+		/* Update health bars */
+		update_health(player1, system);
+		update_health(player2, system);
+
+		/*
+		 * Player 2's turn
+		 */
+
+		wind = rand() % 11 - 5;
+		update_wind(system, wind);
+
 		printf("Getting Player 2 Velocity.\n");
 		getKeyboardInput(1, player2, system);
 		/* Player 2 Angle-Selection */
 		printf("Getting Player 2 Angle.\n");
 		getKeyboardInput(2, player2, system);
+
 		/* Player 2 Animation */
 		printf("Starting animation\n");
 
@@ -121,16 +144,24 @@ int main(void) {
 			break;
 		}
 		}
+
+		/* Update health bars */
+		update_health(player1, system);
+		update_health(player2, system);
+
 		if (player1->health <= 0 || player2->health <= 0) {
 			break;
 		}
 
 	}
 
+	/*
+	 * Find out who won.
+	 */
 	if (player1->health <= 0) {
-		printf("player 2 win\n");
+		printf("Player 2 Wins!!! \n");
 	} else if (player2->health <= 0) {
-		printf("player 1 win\n");
+		printf("Player 1 Wins!!!\n");
 	} else {
 		printf("we shouldn't be here.\n");
 	}
