@@ -15,6 +15,9 @@ ENTITY CannonMan IS
 		LEDG 		: OUT STD_LOGIC_VECTOR(7 downto 0);
 		LEDR		: OUT STD_LOGIC_VECTOR(17 downto 0);
       CLOCK_50 : IN STD_LOGIC;
+		CLOCK_27 : IN	STD_LOGIC;
+		AUD_XCK	: OUT	STD_LOGIC;
+		
 		HEX0		: OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
 		HEX1		: OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
 		HEX2		: OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
@@ -69,7 +72,13 @@ ENTITY CannonMan IS
 		-- AUDIO
 		AUD_BCLK		: 	IN 	STD_LOGIC; 
 		AUD_DACDAT	:	OUT	STD_LOGIC;
-		AUD_DACLRCK	:	IN		STD_LOGIC
+		AUD_DACLRCK	:	IN		STD_LOGIC;
+		AUD_ADCDAT	:	IN		STD_LOGIC;
+		AUD_ADCLRCK	:	IN		STD_LOGIC;
+		
+		-- A/V CONFIG
+		I2C_SDAT		:	INOUT	STD_LOGIC;
+		I2C_SCLK		:	OUT	STD_LOGIC
 		);
 		
 END CannonMan;
@@ -80,6 +89,8 @@ ARCHITECTURE Structure OF CannonMan IS
 		-- system
       clk_clk 			: IN STD_LOGIC;
       reset_reset_n 	: IN STD_LOGIC;
+		audio_clk_clk	:	out STD_LOGIC;
+		audio_secondary_clk: in STD_LOGIC;
 		
 		-- lcd_data
 		lcd_data_DATA 	: INOUT 	STD_LOGIC_VECTOR(7 downto 0);
@@ -141,9 +152,15 @@ ARCHITECTURE Structure OF CannonMan IS
 		ps2_peri_DAT				: INOUT STD_LOGIC;
 		
 		-- AUDIO
-		audio_0_external_interface_BCLK                 : in    std_logic;
-		audio_0_external_interface_DACDAT               : out   std_logic;
-		audio_0_external_interface_DACLRCK              : in    std_logic
+		audio_BCLK                 : in    std_logic;
+		audio_DACDAT               : out   std_logic;
+		audio_DACLRCK              : in    std_logic;
+		audio_ADCDAT					: in	  std_logic;
+		audio_ADCLRCK					: in 	  std_logic;
+		
+		-- A/V CONFIG
+		av_config_SDAT				: inout	std_LOGIC;
+		av_config_sclk				: out		std_logic
 		);
    END COMPONENT;
 
@@ -171,6 +188,8 @@ ARCHITECTURE Structure OF CannonMan IS
 			PORT MAP (
 				clk_clk => CLOCK_50,				
 				reset_reset_n => SW(17),
+				audio_clk_clk => AUD_XCK,
+				audio_secondary_clk => CLOCK_27,
 				
 				keys_export => KEY,
 				ledg_export => LEDG,
@@ -220,8 +239,13 @@ ARCHITECTURE Structure OF CannonMan IS
 				ps2_peri_CLK => PS2_CLK,
             ps2_peri_DAT => PS2_DAT,
 				
-				audio_0_external_interface_BCLK		=>  AUD_BCLK,
-				audio_0_external_interface_DACDAT   =>  AUD_DACDAT,
-				audio_0_external_interface_DACLRCK  =>  AUD_DACLRCK
+				av_config_SDAT => I2C_SDAT,
+				av_config_SCLK => I2C_SCLK,
+				
+				audio_BCLK		=>  AUD_BCLK,
+				audio_DACDAT   =>  AUD_DACDAT,
+				audio_DACLRCK  =>  AUD_DACLRCK,
+				audio_ADCDAT	=>  AUD_ADCDAT,
+				audio_ADCLRCK	=>	 AUD_ADCLRCK
 			);
    END Structure;

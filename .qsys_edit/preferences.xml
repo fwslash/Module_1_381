@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <preferences>
  <debug showDebugMenu="0" />
- <systemtable>
+ <systemtable filter="Default">
   <columns>
-   <connections preferredWidth="319" />
+   <connections preferredWidth="335" />
    <irq preferredWidth="34" />
-   <name preferredWidth="241" />
   </columns>
  </systemtable>
  <clocktable>
   <columns>
-   <clockname preferredWidth="409" />
-   <clocksource preferredWidth="409" />
-   <frequency preferredWidth="394" />
+   <clockname preferredWidth="269" />
+   <clocksource preferredWidth="269" />
+   <frequency preferredWidth="250" />
   </columns>
  </clocktable>
- <window width="1524" height="853" x="91" y="8" />
- <library
-   expandedCategories="Library/University Program,Library,Library/Interface Protocols/SDI,Library/University Program/Audio &amp; Video,Library/Interface Protocols,Project" />
- <hdlexample language="VHDL" />
+ <library expandedCategories="Library,Project" />
+ <window width="1100" height="728" x="0" y="0" />
 </preferences>

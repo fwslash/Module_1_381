@@ -1,5 +1,5 @@
 --dffpipe DELAY=1 WIDTH=1 clock d q ALTERA_INTERNAL_OPTIONS=AUTO_SHIFT_REGISTER_RECOGNITION=OFF;PRESERVE_REGISTER=ON;suppress_da_rule_internal=c106
---VERSION_BEGIN 13.0 cbx_mgl 2013:06:12:18:05:10:SJ cbx_stratixii 2013:06:12:18:03:43:SJ cbx_util_mgl 2013:06:12:18:03:43:SJ  VERSION_END
+--VERSION_BEGIN 13.0 cbx_mgl 2013:04:24:18:11:10:SJ cbx_stratixii 2013:04:24:18:08:47:SJ cbx_util_mgl 2013:04:24:18:08:47:SJ  VERSION_END
 
 
 -- Copyright (C) 1991-2013 Altera Corporation

@@ -42,10 +42,16 @@
 			sram_0_external_interface_CE_N                  : out   std_logic;                                        -- CE_N
 			sram_0_external_interface_OE_N                  : out   std_logic;                                        -- OE_N
 			sram_0_external_interface_WE_N                  : out   std_logic;                                        -- WE_N
-			audio_0_external_interface_BCLK                 : in    std_logic                     := 'X';             -- BCLK
-			audio_0_external_interface_DACDAT               : out   std_logic;                                        -- DACDAT
-			audio_0_external_interface_DACLRCK              : in    std_logic                     := 'X';             -- DACLRCK
-			sdram_clk_clk                                   : out   std_logic                                         -- clk
+			audio_ADCDAT                                    : in    std_logic                     := 'X';             -- ADCDAT
+			audio_ADCLRCK                                   : in    std_logic                     := 'X';             -- ADCLRCK
+			audio_BCLK                                      : in    std_logic                     := 'X';             -- BCLK
+			audio_DACDAT                                    : out   std_logic;                                        -- DACDAT
+			audio_DACLRCK                                   : in    std_logic                     := 'X';             -- DACLRCK
+			sdram_clk_clk                                   : out   std_logic;                                        -- clk
+			audio_secondary_clk                             : in    std_logic                     := 'X';             -- clk
+			audio_clk_clk                                   : out   std_logic;                                        -- clk
+			av_config_SDAT                                  : inout std_logic                     := 'X';             -- SDAT
+			av_config_SCLK                                  : out   std_logic                                         -- SCLK
 		);
 	end component nios2_system;
 
